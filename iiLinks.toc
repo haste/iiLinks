@@ -1,0 +1,7 @@
+## Interface: 20300
+## Title: iiLinks
+## Author: Haste
+## X-eMail: troeks@gmail.com
+## Notes: Turn [Item] into just Item.
+
+links.lua
