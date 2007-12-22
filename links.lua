@@ -32,7 +32,7 @@
 local _AddMessage = ChatFrame1.AddMessage
 
 local AddMessage = function(self, text,...)
-	text = text:gsub("|Hitem(.-)|h%[(.-)%]|h", "|Hitem%1|h%2|h")
+	text = tostring(text):gsub("|Hitem(.-)|h%[(.-)%]|h", "|Hitem%1|h%2|h")
 	return _AddMessage(self, text, ...)
 end
 
