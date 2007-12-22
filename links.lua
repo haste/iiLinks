@@ -29,10 +29,13 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ---------------------------------------------------------------------------]]
 
+local type = type
 local _AddMessage = ChatFrame1.AddMessage
 
 local AddMessage = function(self, text,...)
-	text = tostring(text):gsub("|Hitem(.-)|h%[(.-)%]|h", "|Hitem%1|h%2|h")
+	if(type(text) == "string") then
+		text = text:gsub("|Hitem(.-)|h%[(.-)%]|h", "|Hitem%1|h%2|h")
+	end
 	return _AddMessage(self, text, ...)
 end
 
