@@ -31,12 +31,22 @@
 
 local type = type
 local _AddMessage = ChatFrame1.AddMessage
+local _Insert = ChatFrameEditBox.Insert
 
 local AddMessage = function(self, text,...)
 	if(type(text) == "string") then
 		text = text:gsub("|Hitem(.-)|h%[(.-)%]|h", "|Hitem%1|h%2|h")
 	end
+
 	return _AddMessage(self, text, ...)
+end
+
+_G.ChatFrameEditBox.Insert = function(self, str, ...)
+	if(type(str) == "string") then
+		str = str:gsub("|Hitem(.-)|h[%[]?(.-)[%]]?|h", "|Hitem%1|h[%2]|h")
+	end
+
+	return _Insert(self, str, ...)
 end
 
 for i=1, NUM_CHAT_WINDOWS do
