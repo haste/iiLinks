@@ -50,6 +50,8 @@ _G.ChatFrameEditBox.Insert = function(self, str, ...)
 end
 
 for i=1, NUM_CHAT_WINDOWS do
-	local cf = _G["ChatFrame"..i]
-	cf.AddMessage = AddMessage
+	if(i ~= 2) then
+		local cf = _G["ChatFrame"..i]
+		cf.AddMessage = AddMessage
+	end
 end
