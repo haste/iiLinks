@@ -4,8 +4,6 @@ frame:SetScript('OnEvent', function()
 	local origs = {}
 
 	local type = type
-	local _Insert = ChatFrameEditBox.Insert
-
 	local AddMessage = function(self, text,...)
 		if(type(text) == "string") then
 			text = text:gsub("|H(.-)|h%[(.-)%]|h", "|H%1|h%2|h")
@@ -14,12 +12,12 @@ frame:SetScript('OnEvent', function()
 		return origs[self](self, text, ...)
 	end
 
-	_G.ChatFrameEditBox.Insert = function(self, str, ...)
+	local Insert = function(self, str, ...)
 		if(type(str) == "string") then
 			str = str:gsub("|H(.-)|h[%[]?(.-)[%]]?|h", "|H%1|h[%2]|h")
 		end
 
-		return _Insert(self, str, ...)
+		return origs[self](self, str, ...)
 	end
 
 	for i=1, NUM_CHAT_WINDOWS do
@@ -27,6 +25,10 @@ frame:SetScript('OnEvent', function()
 			local cf = _G["ChatFrame"..i]
 			origs[cf] = cf.AddMessage
 			cf.AddMessage = AddMessage
+
+			local eb = _G['ChatFrame' .. i .. 'EditBox']
+			origs[eb] = eb.Insert
+			eb.Insert = Insert
 		end
 	end
 
